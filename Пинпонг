@@ -4,7 +4,7 @@ F = False
 class GameSprite(sprite,Sprite):
     def __init__(self,imager,x,y,speed,wight,height):
         super().__init__()
-        self.image = transform.scale(imager.load(imager),(wight,height))
+        self.image = transform.scale(image.load(imager),(wight,height))
         self.speed = speed
         self.x = x
         self.y = y
@@ -32,6 +32,7 @@ back = (200,255,255)
 win_height = 500
 win_wight = 550
 window = display.set_mode((win_wight,win_height))
+back = transform.scale(image.load('Фон.png'),(win_wight,win_height))
 window.fill(back)
 
 game = T
