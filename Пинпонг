@@ -1,0 +1,60 @@
+from pygame import *
+T = True
+F = False
+class GameSprite(sprite,Sprite):
+    def __init__(self,imager,x,y,speed,wight,height):
+        super().__init__()
+        self.image = transform.scale(imager.load(imager),(wight,height))
+        self.speed = speed
+        self.x = x
+        self.y = y
+        self.wight = wight
+        self.height = height
+    
+    def reset(self):
+        window.blit(self.image,(self.rect.x, self.rect.y))
+class Player(GameSprite):
+    def update_r(self):
+        keys = key.get_pressed()
+        if keys[K_UP] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.y < win_height - 150:
+            self.rect.y += self.speed
+    def update_l(self):
+        keys = key.get_pressed()
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_s] and self.rect.y < win_height - 150:
+            self.rect.y += self.speed
+
+'''ARENA'''
+back = (200,255,255)
+win_height = 500
+win_wight = 550
+window = display.set_mode((win_wight,win_height))
+window.fill(back)
+
+game = T
+finish = 
+clock = time.Clock()
+Fps = 60
+
+play1 = Player('Меч.png',30,200,3,50,150)
+play2 = Player('Меч.png',200,200,3,50,150)
+ball = GameSprite('Фаербол.jpg',200,200,1,50,50)
+
+'''FIGHT'''
+while game:
+    for e in event.get():
+        if e.type == QUIT:
+            game = F
+        
+    if finish != T:
+        window.fill(back)
+        play1.update_l()
+        play2.update_r()
+        play1.reset()
+        play2.reset()
+        ball.reset()
+    display.update()
+    clock.tick(Fps)
